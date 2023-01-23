@@ -8,7 +8,7 @@ const items = [];
 
  modal.show();
 
-    function onEscKey(evt) {   
+    function onEscKeyPress(evt) {   
         if (evt.code === "Escape") {
             modal.close();
         }

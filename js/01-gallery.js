@@ -11,29 +11,30 @@ const galaryElem = galleryItems
             `<div class="gallery__item"><a class="gallery__link" href=${item.original}><img class="gallery__image" src=${item.preview} data-source=${item.original} alt=${item.description}/></a></div>`
     )
     .join("");
+    
 gallery.innerHTML = galaryElem;
 
-let modalCreate;
-
-gallery.addEventListener("click", (e) => {
+gallery.addEventListener('click', e => {
     e.preventDefault();
-    if (e.target.nodeName !== "IMG") {
-        return;
-    }
-    const modal = document.createElement("div");
-    const newPic = document.createElement("img");
-    newPic.src = e.target.getAttribute("data-source");
-    modal.append(newPic);
+    if (e.target.nodeName !== 'IMG') {
+		return
+	}
 
-    modalCreate = basicLightbox.create(modal);
+    const selectedImage = e.target.getAttribute('data-source')
+
+    const instance = basicLightbox.create(`
+    <img src="${selectedImage}" width="800" height="600">
+`)
+
+    instance.show()
     
-    modalCreate.show();
-});
+    gallery.addEventListener('keydown', e => {
+		if (e.key === 'Escape') {
+			instance.close()
+		}
+	})
+})
 
-document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-        modalCreate.close();
-    }
-});
+
 
 

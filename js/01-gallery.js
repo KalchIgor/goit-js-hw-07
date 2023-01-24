@@ -20,6 +20,20 @@ const galaryElem = galleryItems.map(({ preview, original,
     </div>`
     }).join('');
 
+gallery.insertAdjacentHTML('beforeend', galleryElem);
+
+function onClicImg(evn) {
+    evt.preventDefault();
+     if (evt.target.nodeName !== 'IMG') {
+        return;
+     }
+        const modal = basicLightbox.create(
+            `<img src="${evt.target.dataset.source}" width="800" height="600">`,
+                    {   onShow: () => window.addEventListener('keydown', onEscKeyPress),
+            onClose: () => window.removeEventListener('keydown', onEscKeyPress),
+        }
+    );
+}
 
 
  modal.show();
